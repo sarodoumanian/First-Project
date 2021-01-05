@@ -1,0 +1,13 @@
+<%- include("partials/header") %>
+<div>
+<img class="imggg" src="/profile/<%= user._id %>/picture" alt="">
+</div>
+
+<div>
+    <br>
+<form action="/upload" enctype="multipart/form-data" method="POST"> 
+    <input class=" btn-primary" type="file" name="photo" />
+    <input id="upload" type="submit" class="btn btn-primary"  value="Upload Photo"/>
+ </form>
+ <a class="btn btn-secondary" href="/profile/<%=user._id%>">Cancel</a>
+</div>

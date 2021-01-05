@@ -1,0 +1,87 @@
+<%- include("partials/header") %>
+
+
+
+
+
+
+
+
+
+
+<div class="flex-containerr">
+	<div class="columnn">
+		<div class="container">
+			<div class="row profile">
+				<div class="col-md-3">
+					<div class="profile-sidebar">
+						<!-- SIDEBAR USERPIC -->
+						<div class="profile-userpic">
+							<% if(user.hasProfilePic){ %>
+								<img src="/profile/<%= user._id %>/picture" alt="">
+							<%} else{ %>
+								<img src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="">
+							<% } %>
+						</div>
+						<div>
+							<form action="/upload" enctype="multipart/form-data" method="POST"> 
+								<input type="file" size="60" name="photo" />
+								<input id="upload" type="submit"  value="Upload Photo"/>
+							 </form>
+						</div>
+						<!-- END SIDEBAR USERPIC -->
+						<!-- SIDEBAR USER TITLE -->
+						<div class="profile-usertitle">
+							<div class="profile-usertitle-name">
+								<p>Username: <%= user.username %></p>
+							</div>
+							<div class="profile-usertitle-name">
+								<p>Email: <%= user.email %></p>
+							</div>
+							<div class="profile-usertitle-name">
+								<p>Joined: <%= user.createdAt.toLocaleDateString() %></p>
+							</div>
+							<div class="profile-usertitle-name">
+								<p>Age: <%= user.age %></p>
+							</div>
+						</div>
+						<!-- END SIDEBAR USER TITLE -->
+						<!-- SIDEBAR BUTTONS -->
+						<div class="profile-userbuttons">
+							<a class="btn btn-success btn-sm" href="/update/<%=user._id%>">Update User</a>
+							<a class="btn btn-danger btn-sm" href="">Delete User</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+	<div class="columnn bg-altt">
+		<div class="tab-content profile-tabs-content">
+            <div class="tab-pane active" id="profile-overview" role="tabpanel">
+                <div class="post-editor">
+                    <textarea name="post-field" id="post-field" class="post-field" placeholder="Write Something Cool!"></textarea>
+                    <div class="d-flex">
+                        <button class="btn btn-success px-4 py-1">Post</button>
+                    </div>
+                </div>
+                <!-- /.post-editor -->
+                <div class="stream-posts">
+                    <div class="stream-post">
+                        <div class="sp-author">
+                            <a href="#" class="sp-author-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""></a>
+                            <h6 class="sp-author-name"><a href="#">John Doe</a></h6></div>
+                        <div class="sp-content">
+                            <div class="sp-info">posted 1h ago</div>
+                            <p class="sp-paragraph mb-0">Auk Soldanella plainscraft acetonylidene wolfishness irrecognizant Candolleaceae provision Marsipobranchii arpen Paleoanthropus supersecular inidoneous autoplagiarism palmcrist occamy equestrianism periodontoclasia mucedin overchannel goelism decapsulation pourer zira</p>
+                        </div>
+                        <!-- /.sp-content -->
+                    </div>
+                </div>
+            </div>
+		</div>
+
+	</div>
+</div>

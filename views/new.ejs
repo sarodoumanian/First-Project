@@ -1,0 +1,129 @@
+<%- include("partials/header") %>
+<br>
+<br>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+<div class="profile-wrapper">
+    <div class="profile-section-user fixedd">
+            <div class="text-center">
+                 <% if(user.hasProfilePic){ %>
+                    <img class="imggg" src="/profile/<%= user._id %>/picture" alt="">
+                <%} else{ %>
+                    <img class="imggg" src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="">
+                <% } %>
+            </div>
+            <div class="text-center">
+                <h5 class="mb-4"><%= user.username %></h5>
+            </div>
+            
+            <% if(user.hasProfilePic === false){ %>
+            <form action="/upload" enctype="multipart/form-data" method="POST"> 
+                <input class=" btn-primary" type="file" name="photo" />
+                <input id="upload" type="submit" class="btn btn-primary"  value="Upload Photo"/>
+             </form>
+             <% } else { %>
+                <a class="btn btn-primary lll" href="/UpdateProfilePic">Update Picture</a>
+            <% } %>
+            
+        <!-- /.profile-info-brief -->
+        <hr class="m-0">
+        <div class="hidden-sm-down">
+            <hr class="m-0">
+            <div class="profile-info-contact p-4">
+                <h6 class="mb-3">Contact Information</h6>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Email:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0"><%= user.email %></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Joined at:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0"><%= user.createdAt.toLocaleDateString() %></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Age:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0"><%= user.age %></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="btn btn-success btn-sm" href="/update/<%=user._id%>">Update User</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-sm" href="/deleteUser">Delete User</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.profile-info-contact -->
+            <hr class="m-0">
+ 
+            <!-- /.profile-info-general -->
+            <hr class="m-0">
+        </div>
+        <!-- /.hidden-sm-down -->
+    </div>
+    <!-- /.profile-section-user -->
+    <div class="profile-section-main">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs profile-tabs" role="tablist">
+            <li class="nav-item">Timeline</li>
+        </ul>
+        <!-- /.nav-tabs -->
+        <!-- Tab panes -->
+        <div class="tab-content profile-tabs-content">
+            <div class="tab-pane active" id="profile-overview" role="tabpanel">
+                <div class="post-editor">
+                    <form action="/postStory/<%=user._id%>" method="POST">
+                        <textarea name="postStory" id="post-field" class="post-field" placeholder="Write Something Cool!"></textarea>
+                        <div class="d-flex">
+                            <button type="submit" class="btn btn-success px-4 py-1">Post</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.post-editor -->
+                <% story.forEach(story=>{ %>
+                <div class="stream-posts">
+                    <div class="stream-post parentdiv">
+                        <div class="sp-author">
+                            <p class="ppp"><%=user.username%></p>
+                        </div>
+                        
+                            
+                        <div class="sp-content ">
+                            <div class="sp-info"><%=story.createdAt.toLocaleDateString()%></div>
+                           <p class="sp-paragraph mb-0"><%=story.description%></p>
+                        </div>
+
+                        <div class="childdiv">
+                            <form action="/Deletepost/<%=story._id%>?_method=DELETE" method="POST" >
+                                <button type="submit" class="btn btn-primary-outline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                        <!-- /.sp-content -->
+                    </div>
+                    
+                    
+                </div>
+                <% }) %>
+                <!-- /.stream-posts -->
+            </div>
+        </div>
+        <!-- /.tab-content -->
+    </div>
+    <!-- /.profile-section-main -->
+</div>
+</div>

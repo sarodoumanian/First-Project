@@ -1,0 +1,62 @@
+<%- include("partials/header") %>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+      <% if (noMatch === "No user match that query, please try again."){ %>
+        <div>
+        <h3><%=noMatch%></h3>
+      </div>
+      
+      <%}%>
+      <div class="e-table">
+        <div>
+          <form action="/users" method="GET">
+            <input type="text"  name="search"  placeholder="" class="input-xlarge">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+          
+        </div>
+    <div class="row flex-lg-nowrap">
+      
+         
+            
+            <div class="table-responsive table-lg mt-3">
+              <table class="table table-bordered">
+                <% if (noMatch !== "No user match that query, please try again."){ %>
+                <thead>
+                  <tr>
+                    <th>Photo</th>
+                    <th class="max-width">Username</th>
+                    <th class="sortable">Date</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                  </tr>
+                </thead>
+                <%}%>
+                <% users.forEach(user=>{ %> 
+                <tbody>
+                  <tr>
+                    <td class="align-middle text-center">
+                      
+                      <% if(user.hasProfilePic){ %>
+                        <img class="img2" src="/profile/<%= user._id %>/picture" alt="">
+                      <%} else{ %>
+                        <img class="img2" src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="">
+                      <% } %>
+                    </td>
+                    <td class="text-nowrap align-middle"><%=user.username%></td>
+                    <td class="text-nowrap align-middle"><span><%=user.createdAt.toLocaleDateString()%></span></td>
+                    <td class="text-center align-middle">
+                      <%=user.email%>
+                    </td>
+                    <td class="text-center align-middle">
+                      <%=user.age%>
+                    </td>
+                  </tr>
+                <% }) %>
+        
+      
+      
+                
+                    
+  </body>
+</html>

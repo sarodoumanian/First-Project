@@ -1,0 +1,14 @@
+<%- include("partials/header") %>
+<h3>To delete your account please type your password</h3>
+<div class="div22">
+    <% if(messages.length > 0){ %>
+        <% messages.forEach(message=>{ %>
+          <div class="alert-danger"><%=message%></div>
+        <% })%>
+      <% } %>
+    <br>
+    <form action="/DeleteUser/<%=user._id%>?_method=DELETE" method="POST">
+        <input type="text" name="delUserPass" >
+        <button type="submit" class="btn btn-secondary">Delete User</button>
+    </form>
+</div>
